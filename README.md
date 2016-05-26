@@ -11,9 +11,9 @@ import dispatcher from 'react-data-flow-framework';
 
 
 return (
-    <A state={dispatcher(AState)}>
+    <A state={dispatcher.state(AState)}>
         
-        <B state={dispatcher(BState)} />
+        <B state={dispatcher.state(BState)} />
         
         ...
         
@@ -21,6 +21,28 @@ return (
     </A>
 )
 
+
+
+B = React.createClass({
+    
+    render:function(){
+    
+        return (
+            
+            <div>
+                <button onClick={dispatcher.action('BTN-CLICK-ACTION',{
+                    attribute1:'btn',
+                    attribute2:'click me',
+                    attribute3:12
+                })}>click me!</button>
+            </div>
+        
+        )
+    
+    }
+    
+    
+});
 
 ```
 
