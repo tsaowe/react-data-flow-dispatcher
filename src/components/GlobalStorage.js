@@ -5,11 +5,13 @@
 export default (function () {
     let tree;
     let dispatcher;
+    let map = {};
 
     return function () {
         return {
             tree:tree,
-            dispatcher:dispatcher
+            dispatcher:dispatcher,
+            map:map
         }
     }
 

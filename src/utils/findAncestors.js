@@ -25,8 +25,11 @@ import utils from  '../utils/common';
      * @private         仅供内部使用
      */
     var _find = function (ancestor, child, deep) {
+        if(utils.isSmallestData(child)){
+            return false;
+        }
         if( deep ){
-            //  不需要排序
+            //  不需要排序,只需要比对内存地址是否相同即可
 
             if(ancestor === child){
                 return [];
@@ -36,6 +39,7 @@ import utils from  '../utils/common';
 
                     if(typeof ancestor === 'object'){
 
+                        
                         
 
                     } else {
@@ -72,5 +76,66 @@ import utils from  '../utils/common';
 
 
     };
+
+    /**
+     *
+     * @param map = {_ohjotu7wlpp40nali01s2lnmi:{value:{.....},parent:[],expand:false}}
+     */
+    var objectToMap = function (map) {
+
+        let needRecursive = false;
+
+        var keys = Object.keys(map);
+        if (keys.length > 0) {
+            keys.forEach((key, idx)=> {
+
+                //最初始化的子元素
+                var obj = map[key].value;
+                var parent = map[key].parent;
+                map[key].expand = true;
+                if (!utils.isSmallestData(obj)) {
+                    if (utils.isArray(obj)) {
+                        // array
+                        obj.forEach((itm, cIdx)=> {
+                            if (!utils.isSmallestData(itm)) {
+                                // 不是最小单位的时候才会加入到map
+                                let newParent = parent.push(cIdx);
+                                var newObject = {};
+                                newObject.parent = newParent;
+                                newObject.value = itm;
+                                if (utils.childrenAllSmallestData(itm)) {
+                                    newObject.expand = true;
+                                }else {
+                                    needRecursive = true;
+                                }
+                                map[utils.randomString()] = newObject;
+                            }
+                        });
+                    } else {
+                        // object
+                        let newKeys = Object.keys(obj);
+                        newKeys.forEach((nK, nIdx)=> {
+                            if (!utils.isSmallestData(obj[nK])) {
+                                // 不是最小单位的时候才会加入到map
+                                let newParent = parent.push(nK);
+                                var newObject = {};
+                                newObject.parent = newParent;
+                                newObject.value = obj[nK];
+                                if (utils.childrenAllSmallestData(obj[nK])) {
+                                    newObject.expand = true;
+                                }else {
+                                    needRecursive = true;
+                                }
+                                map[utils.randomString()] = newObject;
+                            }
+                        });
+                    }
+                }
+            });
+        }
+        if(needRecursive){
+            objectToMap(map);
+        }
+    }
 
 })();
