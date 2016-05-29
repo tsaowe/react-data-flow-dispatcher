@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/tsaowe/react-data-flow-dispatcher/issues"
   },
-  "homepage": "https://github.com/tsaowe/react-data-flow-dispatcher#readme"
+  "homepage": "https://github.com/tsaowe/react-data-flow-dispatcher#readme",
+  "devDependencies": {
+    "react": "^15.1.0"
+  }
 }

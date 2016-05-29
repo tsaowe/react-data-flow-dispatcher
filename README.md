@@ -30,11 +30,7 @@ B = React.createClass({
         return (
             
             <div>
-                <button onClick={dispatcher.action('BTN-CLICK-ACTION',{
-                    attribute1:'btn',
-                    attribute2:'click me',
-                    attribute3:12
-                })}>click me!</button>
+                <button onClick={dispatcher.action('BTN-CLICK-ACTION')}>click me!</button>
             </div>
         
         )
@@ -45,6 +41,33 @@ B = React.createClass({
 });
 
 ```
+
+### optional
+
+```
+B = React.createClass({
+    
+    render:function(){
+    
+        return (
+            
+            <div>
+                <button onClick={dispatcher.action('BTN-CLICK-ACTION',{
+                                attribute1:'btn',
+                                attribute2:'click me',
+                                attribute3:12
+                            })}>click me!</button>
+            </div>
+        
+        )
+    
+    }
+    
+    
+});
+
+```
+
 
 
 

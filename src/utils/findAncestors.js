@@ -2,7 +2,7 @@
  * Created by tsaowe on 16/5/25.
  */
 
-
+import utils from  '../utils/common';
 
 (function () {
 
@@ -25,9 +25,36 @@
      * @private         仅供内部使用
      */
     var _find = function (ancestor, child, deep) {
-        if(deep){
+        if( deep ){
             //  不需要排序
-        }else{
+
+            if(ancestor === child){
+                return [];
+            } else {
+                // 当前这期只做child为引用数据类型的复杂数据,不做基本数据
+                if(utils.isObjectType(child)){
+
+                    if(typeof ancestor === 'object'){
+
+                        
+
+                    } else {
+                        //function,array
+
+
+
+
+
+
+                    }
+
+
+                }else{
+                    //todo 后期做基本数据类型,也可能不做
+                }
+            }
+
+        } else {
             //  需要排序
         }
     };

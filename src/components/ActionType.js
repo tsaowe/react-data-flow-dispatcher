@@ -15,7 +15,7 @@ export default class ActionType {
             warning('ActionType should be typeof String,but given ' + typeof value+
                 ', this will be ignore by default value by react data flow framework');
             this.type = utils.random();
-        }else {
+        } else {
             this.type = value;
         }
     }
