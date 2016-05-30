@@ -4,6 +4,8 @@
 
 import utils from  '../utils/common';
 
+var exp = null;
+
 (function () {
 
     /**
@@ -34,28 +36,9 @@ import utils from  '../utils/common';
             if(ancestor === child){
                 return [];
             } else {
-                // 当前这期只做child为引用数据类型的复杂数据,不做基本数据
-                if(utils.isObjectType(child)){
-
-                    if(typeof ancestor === 'object'){
-
-                        
-                        
-
-                    } else {
-                        //function,array
-
-
-
-
-
-
-                    }
-
-
-                }else{
-                    //todo 后期做基本数据类型,也可能不做
-                }
+                let map = {};
+                objectToMap(map,{value:ancestor,parent:[],expand:false});
+                console.log(map)
             }
 
         } else {
@@ -136,6 +119,10 @@ import utils from  '../utils/common';
         if(needRecursive){
             objectToMap(map);
         }
-    }
+    };
+
+    exp = find;
 
 })();
+
+export default exp;
