@@ -14,8 +14,8 @@ var exp = null;
      * @param child     查找节点
      *
      */
-    var find = function (ancestor,child) {
-        return _find(ancestor,child,false);
+    var find = function (ancestor, child) {
+        return _find(ancestor, child, false);
     };
 
 
@@ -27,22 +27,30 @@ var exp = null;
      * @private         仅供内部使用
      */
     var _find = function (ancestor, child, deep) {
-        if(utils.isSmallestData(child)){
+        if (utils.isSmallestData(child)) {
             return false;
         }
-        if( deep ){
+        if (deep) {
             //  不需要排序,只需要比对内存地址是否相同即可
 
-            if(ancestor === child){
+            if (ancestor === child) {
                 return [];
             } else {
                 let map = {};
-                objectToMap(map,{value:ancestor,parent:[],expand:false});
-                console.log(map)
+                objectToMap(map, {value: ancestor, parent: [], expand: false});
+                var result = [];
+                var keys = Object.keys(map);
+                for (let i = 0; i < keys.length; i++) {
+                    var obj = map[keys[i]];
+                    if (obj.value === child) {
+                        result = obj.parent;
+                        break;
+                    }
+                }
+                return result;
             }
-
         } else {
-            //  需要排序
+            return undefined;//  需要排序
         }
     };
 
@@ -55,7 +63,6 @@ var exp = null;
      * return {1:'XXX',a:.....z:...}
      */
     var _sort = function (obj) {
-
 
 
     };
@@ -88,7 +95,7 @@ var exp = null;
                                 newObject.value = itm;
                                 if (utils.childrenAllSmallestData(itm)) {
                                     newObject.expand = true;
-                                }else {
+                                } else {
                                     needRecursive = true;
                                 }
                                 map[utils.randomString()] = newObject;
@@ -106,7 +113,7 @@ var exp = null;
                                 newObject.value = obj[nK];
                                 if (utils.childrenAllSmallestData(obj[nK])) {
                                     newObject.expand = true;
-                                }else {
+                                } else {
                                     needRecursive = true;
                                 }
                                 map[utils.randomString()] = newObject;
@@ -116,7 +123,7 @@ var exp = null;
                 }
             });
         }
-        if(needRecursive){
+        if (needRecursive) {
             objectToMap(map);
         }
     };

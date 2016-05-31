@@ -3,7 +3,8 @@
  */
 
 import _store from './GlobalStorage';
-let {tree,dispatcher} = _store();
+import find from '../utils/findAncestors';
+let {tree,dispatcher,map} = _store();
 
 export default {
 
@@ -32,6 +33,8 @@ export default {
             
             // 数组与object都能转化为key value键值对
             tree.children = {};
+            
+            map = 
 
         } else {
             
